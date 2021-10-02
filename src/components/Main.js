@@ -8,8 +8,9 @@ const Main = () => {
         const [search,setSearch]=useState('Yemen');
         const [wd,setwd]=useState(null);
         const searchWeather=(event)=>{
-
-                setSearch(event.target.value);
+          event.preventDefault();
+              
+                setSearch(event.target[0].value);
               
         }
        
@@ -30,7 +31,7 @@ const Main = () => {
 
             fetchAPI();
 
-            console.log(process.env)
+           
             
             
         },[search] )
@@ -48,7 +49,15 @@ const Main = () => {
            <div>
             <div className="app-wrap">
     <header>
-      <input type="text" autoComplete="off" className="search-box" placeholder="Search for a city..." onChange={searchWeather}/>
+      <form onSubmit={searchWeather}>
+
+      <input type="text" autoComplete="off" className="search-box" placeholder="Search for a city..." name="sc" />
+      <div className="cen">
+      <button type="submit"  >Search</button>
+
+      </div>
+
+      </form>
     </header>
     {!city?
     <h2>No Data Found</h2>
